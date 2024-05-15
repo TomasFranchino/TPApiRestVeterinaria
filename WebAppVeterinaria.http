@@ -1,6 +1,6 @@
 @WebAppVeterinaria_HostAddress = http://localhost:5258
 
-GET {{WebAppVeterinaria_HostAddress}}/weatherforecast/
+GET {{WebAppVeterinaria_HostAddress}}/api/animal/GetAnimales
 Accept: application/json
 
 ###

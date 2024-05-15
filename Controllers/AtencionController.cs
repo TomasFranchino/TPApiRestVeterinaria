@@ -7,6 +7,8 @@ using WebAppVeterinaria.Models;
 
 namespace WebAppVeterinaria.Controllers
 {
+    [ApiController]
+    [Route("api/atencion")]
     public class AtencionController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -123,12 +125,12 @@ namespace WebAppVeterinaria.Controllers
         }
 
 
-        [HttpPut("PutAtencion")]
+        [HttpPut("PutAtencion/{idAtencion}")]
         public ResponseDto PutAtencion([FromBody] DTOAtencion.PutDTOAtencion atencion, int idAtencion)
         {
             try
             {
-                Atencion aten = _context.Atenciones.Where(x => x.Id == idAtencion).FirstOrDefault();
+                Atencion aten = _context.Atenciones.FirstOrDefault(x => x.Id == idAtencion);
                 Animal animal = _context.Animal.FirstOrDefault(x => x.Id == atencion.AnimalId);
                 if (aten == null || animal == null)
                 {

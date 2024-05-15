@@ -13,16 +13,7 @@ namespace WebAppVeterinaria.DTO
             public string? Medicamentos { get; set; }
         }
 
-        public class GetDTOAtencion
-        {
-            public int Id { get; set; }
-            public Animal Animal { get; set; }
-            public string Motivo { get; set; }
-            public string Tratamiento { get; set; }
-            public DateTime Fecha { get; set; }
-            public string Medicamentos { get; set; }
-        }
-
+      
         public class PutDTOAtencion
         {
             public int AnimalId { get; set; }

@@ -83,7 +83,7 @@ namespace WebAppVeterinaria.Controllers
             return _response;
         }
 
-        [HttpGet("ListarAnimalesDeUnDueño")]
+        [HttpGet("ListarAnimalesDeUnDueño/{idDueño}")]
         public ResponseDto ListarAnimalesDeUnDueño(int idDueño)
         {
             try
@@ -108,7 +108,7 @@ namespace WebAppVeterinaria.Controllers
         }
 
 
-        [HttpPut("PutDueño")]
+        [HttpPut("PutDueño/{idDueño}")]
         public ResponseDto PutDueño([FromBody] DTODueño.PutDTODueño dueño,int IdDueño)
         {
             try
