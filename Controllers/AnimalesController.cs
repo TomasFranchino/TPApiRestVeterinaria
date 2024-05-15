@@ -67,7 +67,14 @@ namespace WebAppVeterinaria.Controllers
             try
             {
                 Animal animal = _context.Animal.FirstOrDefault(x=>x.Id==id);
+                if (animal == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Animal no encontrado.";
+                    return _response;
+                }
                 _response.Data = animal;
+                
             }
             catch (Exception ex)
             {
@@ -76,6 +83,7 @@ namespace WebAppVeterinaria.Controllers
             }
             return _response;
         }
+
         [HttpPut("AsignarDueño")]
         public ResponseDto AsignarDueño(int idAnimal, int idDueño)
         {
@@ -108,11 +116,24 @@ namespace WebAppVeterinaria.Controllers
             return _response;
         }
         [HttpPut("PutAnimal")]
-        public ResponseDto PutAnimal([FromBody] Animal animal)
+        public ResponseDto PutAnimal([FromBody] DTOAnimal.PutDTOAnimal animal, int idAnimal)
         {
             try
-            {           
-                _context.Animal.Update(animal);
+            {     
+                Animal anim = _context.Animal.FirstOrDefault(x=> x.Id == idAnimal);
+                if(anim == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Animal no encontrado.";
+                    return _response;
+                }
+                anim.Nombre = animal.Nombre;
+                anim.Edad = animal.Edad;
+                anim.DueñoId = animal.IdDueño;
+                anim.Especie = animal.Especie;
+                anim.Raza= animal.Raza;
+                anim.Sexo = animal.Sexo;
+                _context.Animal.Update(anim);
                 _context.SaveChanges();
 
                 _response.Data = animal;
@@ -131,9 +152,15 @@ namespace WebAppVeterinaria.Controllers
             try
             {
                 var animal = _context.Animal.Where(x=>x.Id==id).FirstOrDefault();
+                if (animal == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Animal no encontrado.";
+                    return _response;
+                }
                 _context.Animal.Remove(animal);
                 _context.SaveChanges();
-
+               
             }
             catch (Exception ex)
             {

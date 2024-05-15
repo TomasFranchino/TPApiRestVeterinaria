@@ -7,15 +7,14 @@ namespace WebAppVeterinaria.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int AnimalId { get; set; } // Foreign Key
         public Animal Animal { get; set; }
         [Required]
         public string Motivo { get; set; }
-        [Required]
         public string Tratamiento { get; set; }
-        [Required]
         public DateTime Fecha { get; set; }
-        public string Medicamentos { get; set; }
+        public string? Medicamentos { get; set; }
         public Atencion()
         {
           

@@ -11,7 +11,6 @@ namespace WebAppVeterinaria.DTO
             public string Nombre { get; set; }
             public string Apellido { get; set; }
             public string Telefono { get; set; }
-            public List<Animal>? Animales { get; set; } = new List<Animal>();
         }
 
         public class PutDTODueño
@@ -20,7 +19,6 @@ namespace WebAppVeterinaria.DTO
             public string Nombre { get; set; }
             public string Apellido { get; set; }
             public string Telefono { get; set; }
-            public List<Animal>? Animales { get; set; } = new List<Animal>();
         }
 
         public class PostDTODueño

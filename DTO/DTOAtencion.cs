@@ -6,12 +6,11 @@ namespace WebAppVeterinaria.DTO
     {
         public class PostDTOAtencion
         {
-            public int Id { get; set; }
-            public Animal Animal { get; set; }
+            public int AnimalId { get; set; }
             public string Motivo { get; set; }
             public string Tratamiento { get; set; }
             public DateTime Fecha { get; set; }
-            public string Medicamentos { get; set; }
+            public string? Medicamentos { get; set; }
         }
 
         public class GetDTOAtencion
@@ -26,8 +25,7 @@ namespace WebAppVeterinaria.DTO
 
         public class PutDTOAtencion
         {
-            public int Id { get; set; }
-            public Animal Animal { get; set; }
+            public int AnimalId { get; set; }
             public string Motivo { get; set; }
             public string Tratamiento { get; set; }
             public DateTime Fecha { get; set; }

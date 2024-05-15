@@ -6,6 +6,7 @@ namespace WebAppVeterinaria.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int Dni { get; set; }
         [Required]
         public string Nombre { get; set; }

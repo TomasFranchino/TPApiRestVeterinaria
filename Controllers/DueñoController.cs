@@ -67,6 +67,12 @@ namespace WebAppVeterinaria.Controllers
             try
             {
                 Dueño dueño = _context.Dueño.FirstOrDefault(x => x.Id == id);
+                if (dueño == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Dueño no encontrado.";
+                    return _response;
+                }
                 _response.Data = dueño;
             }
             catch (Exception ex)
@@ -77,12 +83,50 @@ namespace WebAppVeterinaria.Controllers
             return _response;
         }
 
-        [HttpPut("PutDueño")]
-        public ResponseDto PutDueño([FromBody] Dueño dueño)
+        [HttpGet("ListarAnimalesDeUnDueño")]
+        public ResponseDto ListarAnimalesDeUnDueño(int idDueño)
         {
             try
             {
-                _context.Dueño.Update(dueño);
+                IEnumerable<Animal> animalesdeundueño = _context.Animal.Where(x => x.DueñoId == idDueño).ToList();
+                if (animalesdeundueño.Count() == 0)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Este Dueño aun no posee animales o introdujo mal el id del dueño.";
+                    return _response;
+                }
+                _response.Data = animalesdeundueño;
+            }
+            catch (Exception ex) 
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+
+             return _response;
+
+        }
+
+
+        [HttpPut("PutDueño")]
+        public ResponseDto PutDueño([FromBody] DTODueño.PutDTODueño dueño,int IdDueño)
+        {
+            try
+            {
+                Dueño due = _context.Dueño.FirstOrDefault(x=> x.Id == IdDueño);
+                if (due==null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Dueño no encontrado.";
+                    return _response;
+                }
+
+                due.Nombre = dueño.Nombre;
+                due.Telefono = dueño.Telefono;
+                due.Apellido = dueño.Apellido;
+                due.Dni = dueño.Dni;
+
+                _context.Dueño.Update(due);
                 _context.SaveChanges();
 
                 _response.Data = dueño;
@@ -96,11 +140,17 @@ namespace WebAppVeterinaria.Controllers
         }
 
         [HttpDelete("DeleteDueño/{id}")]
-        public ResponseDto DeleteAnimal(int id)
+        public ResponseDto DeleteDueño(int id)
         {
             try
             {
                 var dueño = _context.Dueño.Where(x => x.Id == id).FirstOrDefault();
+                if (dueño == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Dueño no encontrado.";
+                    return _response;
+                }
                 _context.Dueño.Remove(dueño);
                 _context.SaveChanges();
 
