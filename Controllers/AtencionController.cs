@@ -183,6 +183,30 @@ namespace WebAppVeterinaria.Controllers
             return _response;
         }
 
+        [HttpGet("GetMedicamento/{id}")]
+        public ResponseDto GetMedicamento(int id)
+        {
+            try
+            {
+                Atencion atencion = _context.Atenciones.FirstOrDefault(x => x.Id == id);
+                if (atencion == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Atenciónes no encontradas.";
+                    return _response;
+                }
+                 _response.Data = atencion.Medicamentos;
+                             
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
 
     }
 }

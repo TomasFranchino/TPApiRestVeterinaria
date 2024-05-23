@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ConsoleVeterinaria
@@ -63,6 +64,24 @@ namespace ConsoleVeterinaria
             public DateTime Fecha { get; set; }
             public string? Medicamentos { get; set; }
             public Atencion()
+            {
+
+            }
+
+            
+            
+        }
+        public class ResponseDto
+        {
+            [JsonPropertyName("data")]
+            public object Data { get; set; }
+
+            [JsonPropertyName("isSuccess")]
+            public bool IsSuccess { get; set; }
+
+            [JsonPropertyName("message")]
+            public string Message { get; set; }
+            public ResponseDto()
             {
 
             }
