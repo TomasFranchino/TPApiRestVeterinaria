@@ -19,6 +19,9 @@ Este proyecto es una aplicación integral para la administración de clínicas v
   - Registrar atenciones médicas para animales, incluyendo datos como motivo, tratamiento, fecha y medicamentos.
   - Consultar el historial de atenciones y gestionar seguimientos.
 
+- **Arquitectura**:
+  - MVC(Modelo, Vista, Controlador)
+
 - **API REST**:  
   - El backend está desarrollado en C# con ASP.NET Core, exponiendo recursos mediante una API REST.
   - La API implementa operaciones CRUD (crear, leer, actualizar, eliminar) para cada entidad.
